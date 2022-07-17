@@ -29,3 +29,20 @@ export function getInterview(state, interview) {
   return interviewObj;
 
 }
+
+export function getInterviewersForDay(state, day) {
+  //... returns an array of appointments for that day
+  const days = state.days;
+  const interviewers = state.interviewers; 
+  const selectedDay = days.filter(eachDay => eachDay.name === day);
+  const interviewersArray = [];
+  
+  if (selectedDay[0]) {
+    const interviewersIds = selectedDay[0].interviewers    
+    for (const id of interviewersIds) {
+      interviewersArray.push(interviewers[id]);
+    }      
+  }
+ 
+  return interviewersArray;
+}
