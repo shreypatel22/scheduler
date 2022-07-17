@@ -6,6 +6,7 @@ import DayList from "./DayList";
 import Appointment from './Appointment';
 import { getAppointmentsForDay, getInterview } from "../helpers/selectors";
 
+
 export default function Application(props) {
 
   const [state, setState] = useState({
@@ -16,9 +17,7 @@ export default function Application(props) {
   });
 
   const setDay = day => setState({ ...state, day }); 
-
-  
-
+ 
     
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export default function Application(props) {
         key={appointment.id} 
         id={appointment.id}
         time={appointment.time}
-        interview={interview}        
+        interview={interview}
       />
     )
   }) 

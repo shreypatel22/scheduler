@@ -10,7 +10,7 @@ export default function useVisualMode(initialMode) {
       newHistory.pop();
       setHistory(newHistory)
     }
-    
+
     setMode(newMode)
     setHistory((prev) => [...prev, newMode])
     
