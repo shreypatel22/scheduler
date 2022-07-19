@@ -39,7 +39,7 @@ export default function useApplicationData() {
     const updatedState = { ...state, days: updatedDaysArr };
       
     console.log(updatedState)
-    return updatedState;    
+    return updatedState;
     
   }
 
