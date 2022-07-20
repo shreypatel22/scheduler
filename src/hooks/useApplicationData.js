@@ -81,9 +81,7 @@ export default function useApplicationData() {
           appointments
         });
       });
-  }
-
-  console.log(state);
+  }  
 
   return {
     state,
