@@ -27,7 +27,7 @@ export default function useApplicationData() {
     const currentDayIndex = state.days.findIndex(day => day.name === state.day);
     const currentDayObject = state.days[currentDayIndex];   
 
-    const spot = increment ? -1 : 1
+    const spot = increment ? -1 : 1;
 
     const updatedDayObj = { ...currentDayObject, spots: currentDayObject.spots += spot };    
     
@@ -81,7 +81,7 @@ export default function useApplicationData() {
           appointments
         });
       });
-  }  
+  }
 
   return {
     state,
