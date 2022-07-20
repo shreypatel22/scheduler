@@ -23,29 +23,22 @@ export default function useApplicationData() {
     })
   }, []);
 
-  const updateSpots = state => {
+  const updateSpots = (state, increment)  => {
     const currentDayIndex = state.days.findIndex(day => day.name === state.day);
-    const currentDayObject = state.days[currentDayIndex];
+    const currentDayObject = state.days[currentDayIndex];   
 
-    const spots = currentDayObject.appointments.filter(id => 
-      !state.appointments[id].interview
-    ).length
+    const spot = increment ? -1 : 1
 
-    const updatedDayObj = { ...currentDayObject, spots };
+    const updatedDayObj = { ...currentDayObject, spots: currentDayObject.spots += spot };    
     
     const updatedDaysArr = [...state.days];
-    updatedDaysArr[currentDayIndex] = updatedDayObj;
-  
-    const updatedState = { ...state, days: updatedDaysArr };
-      
-    console.log(updatedState)
-    return updatedState;
-    
+    updatedDaysArr[currentDayIndex] = updatedDayObj;      
+
+    return updatedDaysArr;    
   }
 
 
-  function bookInterview(id, interview) {
-    // console.log(id, interview);
+  function bookInterview(id, interview) {    
 
     const appointment = {
       ...state.appointments[id],
@@ -59,11 +52,11 @@ export default function useApplicationData() {
 
     return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
       .then(() => {
-        const updatedState = updateSpots(state);
+        const days = updateSpots(state, true);
         setState({
           ...state,          
           appointments,
-          updatedState
+          days
         });
       });
   };
@@ -81,10 +74,10 @@ export default function useApplicationData() {
 
     return axios.delete(`http://localhost:8001/api/appointments/${id}`, {appointment})
       .then(() => {
-        const updatedState = updateSpots(state);        
+        const days = updateSpots(state, false);        
         setState({
           ...state,
-          updatedState,
+          days,
           appointments
         });
       });
