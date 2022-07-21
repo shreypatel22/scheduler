@@ -12,7 +12,7 @@ const [error, setError] = useState();
 
 const validate = () => {
   if(!student) {
-    setError("student name cannot be blank")
+    setError("student name cannot be blank")    
     return;
   }
 
@@ -20,12 +20,14 @@ const validate = () => {
     setError("Please select an interviewer");
     return;
   }
+  setError("");
   props.onSave(student, interviewer)
 }
 
 const reset = () => {
   setStudent("");
   setInterviewer(null);
+  setError("");
 }
 
 const cancel = () => {
@@ -46,7 +48,7 @@ const cancel = () => {
             onChange={(event) => setStudent(event.target.value)}
             data-testid="student-name-input"
           />
-          {error && <div><Error message={error} onClose={() => setError("")}/></div>}
+          <section className="appointment__validation">{error}</section>
         </form>
         <InterviewerList
           value={interviewer}
@@ -57,7 +59,7 @@ const cancel = () => {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={() => validate()}>Save</Button>
+          <Button confirm onClick={validate}>Save</Button>
         </section>
       </section>
     </main>
