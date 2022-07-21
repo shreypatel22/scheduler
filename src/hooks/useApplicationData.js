@@ -18,14 +18,14 @@ export default function useApplicationData() {
       axios.get(`/api/days`),
       axios.get(`/api/appointments`),
       axios.get(`/api/interviewers`)
-    ]).then((all) => {      
+    ]).then((all) => {           
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));  
     })
   }, []);
 
   const updateSpots = (state, increment)  => {
     const currentDayIndex = state.days.findIndex(day => day.name === state.day);
-    const currentDayObject = state.days[currentDayIndex];   
+    const currentDayObject = {...state.days[currentDayIndex]}
 
     const spot = increment ? -1 : 1;
 
@@ -38,7 +38,7 @@ export default function useApplicationData() {
   }
 
 
-  function bookInterview(id, interview) {    
+  function bookInterview(id, interview, create) {    
 
     const appointment = {
       ...state.appointments[id],
@@ -52,7 +52,7 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${id}`, {interview})
       .then(() => {
-        const days = updateSpots(state, true);
+        const days = create ? updateSpots(state, true) : state.days;
         setState({
           ...state,          
           appointments,

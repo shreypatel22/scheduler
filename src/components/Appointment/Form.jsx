@@ -21,7 +21,7 @@ const validate = () => {
     return;
   }
   setError("");
-  props.onSave(student, interviewer)
+  onSave(student, interviewer)
 }
 
 const reset = () => {
