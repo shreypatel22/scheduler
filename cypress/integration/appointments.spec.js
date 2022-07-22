@@ -1,10 +1,12 @@
 describe('Appointments', ()=>{
+  // Always do this before each test
   beforeEach(() => {
     cy.request("GET", "/api/debug/reset");    
     cy.visit("/");    
     cy.contains("Monday");
   }); 
   
+  // Book interview
   it("should book an interview", () => {      
     cy.get("[alt=Add]")
       .first()
@@ -16,6 +18,7 @@ describe('Appointments', ()=>{
     cy.contains(".appointment__card--show", "Sylvia Palmer");
   });
 
+  // Edit Interview
   it("should edit an interview", () => {
     cy.get("[alt=Edit]")
       .first()
@@ -27,6 +30,7 @@ describe('Appointments', ()=>{
     cy.contains(".appointment__card--show", "Tori Malcolm");
   });
 
+  // Cancel Interview
   it("should cancel an interview", () => {
     cy.get("[alt=Delete]")
       .click({ force: true });  
