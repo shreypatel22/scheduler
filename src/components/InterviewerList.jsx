@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 
 function InterviewerList(props) {
   
-  const {interviewers, value, onChange} = props;
-  
+  const {interviewers, value, onChange} = props;  
 
   const interviewersComponents = interviewers.map((interviewer) => {    
     return (
@@ -18,8 +17,6 @@ function InterviewerList(props) {
       />
     )
   })
-  
-
 
   return (
     <section className="interviewers">
@@ -29,6 +26,7 @@ function InterviewerList(props) {
   )
 }
 
+// propTypes to check if interviewers is an array
 InterviewerList.propTypes = {
   interviewers: PropTypes.array.isRequired
 };

@@ -5,6 +5,7 @@ import classNames from "classnames";
 export default function DayListItem(props) {
   const dayClass = classNames("day-list__item", {"day-list__item--selected": props.selected, "day-list__item--full": !props.spots});
 
+  // Custom messages depending on number of spots remaining
   const formatSpots = () => {
     if (props.spots > 1) {
       return `${props.spots} spots remaining`;

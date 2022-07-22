@@ -1,39 +1,42 @@
 import React, { useState } from 'react';
 import Button from "../Button"
-import Error from "./Error"
 import InterviewerList from "../InterviewerList"
 
 export default function Form(props) {
 
-const {interviewers, onCancel, onSave} = props;
-const [student, setStudent] = useState(props.student || "");
-const [interviewer, setInterviewer] = useState(props.interviewer || null);
-const [error, setError] = useState();
+  // States
+  const {interviewers, onCancel, onSave} = props;
+  const [student, setStudent] = useState(props.student || "");
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState();
 
-const validate = () => {
-  if(!student) {
-    setError("student name cannot be blank")    
-    return;
+  // Function to validate user input
+  const validate = () => {
+    if(!student) {
+      setError("student name cannot be blank")    
+      return;
+    }
+
+    if (!interviewer) {
+      setError("Please select an interviewer");
+      return;
+    }
+    setError("");
+    onSave(student, interviewer)
   }
 
-  if (!interviewer) {
-    setError("Please select an interviewer");
-    return;
+  // Reset function
+  const reset = () => {
+    setStudent("");
+    setInterviewer(null);
+    setError("");
   }
-  setError("");
-  onSave(student, interviewer)
-}
 
-const reset = () => {
-  setStudent("");
-  setInterviewer(null);
-  setError("");
-}
-
-const cancel = () => {
-  reset();
-  onCancel();
-}
+  // Cancel function
+  const cancel = () => {
+    reset();
+    onCancel();
+  }
 
   return (
     <main className="appointment__card appointment__card--create">      

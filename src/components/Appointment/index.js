@@ -11,6 +11,7 @@ import Error from './Error';
 
 export default function Appointment(props) {
   
+  // Transition modes
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -21,12 +22,11 @@ export default function Appointment(props) {
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
 
-
-
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
   
+  // Saves new appointment
   function save(name, interviewer, create = true) {
     const interview = {
       student: name,
@@ -39,14 +39,13 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_SAVE, true));
   }
 
+  // Deletes appointment
   function deleteApp() {   
     transition(DELETING, true)
     props.cancelInterview(props.id)
       .then(() => transition(EMPTY))    
       .catch(error => transition(ERROR_DELETE, true));
-  }
-
- 
+  } 
 
   return (
     <article className="appointment" data-testid="appointment">

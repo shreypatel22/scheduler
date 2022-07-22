@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-
 import "components/Button.scss";
 
 export default function Button(props) {
@@ -12,7 +11,7 @@ export default function Button(props) {
     onClick={props.onClick}
     className={buttonClass}
   >
-      {props.children}
+       {props.children}
   </button>
   );
 }
